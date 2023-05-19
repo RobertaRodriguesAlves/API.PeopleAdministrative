@@ -7,6 +7,11 @@ namespace API.PeopleAdministrative.Shared.Errors;
 [ExcludeFromCodeCoverage]
 public sealed class ValidationError : Error
 {
+    public ValidationError()
+    {
+
+    }
+
     public ValidationError(string message)
         : base(message) { }
 
