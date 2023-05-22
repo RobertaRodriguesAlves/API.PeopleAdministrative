@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using System;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace API.PeopleAdministrative.PublicApi.Extensions;
 
@@ -20,17 +17,11 @@ public static class SwaggerExtensions
                 Title = "API Administrative People",
                 Contact = new OpenApiContact
                 {
-                    Name = "Roberta Suélen Rodrigues Alves",
-                    Url = new Uri("rodriguesalves.roberta@gmail.com")
+                    Name = "Roberta Suélen Rodrigues Alves"
                 }
             });
 
             options.ResolveConflictingActions(apiDescription => apiDescription.FirstOrDefault());
-
-            // Set the comments path for the Swagger JSON and UI.
-            var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            options.IncludeXmlComments(xmlPath, true);
         });
 
         services.AddSwaggerGenNewtonsoftSupport();

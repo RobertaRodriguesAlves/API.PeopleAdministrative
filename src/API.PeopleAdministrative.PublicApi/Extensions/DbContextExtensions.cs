@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace API.PeopleAdministrative.PublicApi.Extensions;
 
@@ -20,7 +21,7 @@ public static class DbContextExtensions
             var connectionString
                 = serviceProvider.GetRequiredService<IOptions<ConnectionStrings>>().Value;
 
-            optionsBuilder.UseSqlServer(connectionString.Database, sqlOptions =>
+            optionsBuilder.UseMySql(connectionString.Database, ServerVersion.AutoDetect(connectionString.Database), sqlOptions =>
             {
                 sqlOptions.MigrationsAssembly(AssemblyName);
 

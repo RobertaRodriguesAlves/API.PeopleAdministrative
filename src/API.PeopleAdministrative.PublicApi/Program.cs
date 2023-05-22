@@ -2,9 +2,9 @@ using API.PeopleAdministrative.Application;
 using API.PeopleAdministrative.Infrastructure;
 using API.PeopleAdministrative.Infrastructure.Data.Context;
 using API.PeopleAdministrative.PublicApi.Extensions;
+using API.PeopleAdministrative.Shared;
 using API.PeopleAdministrative.Shared.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -24,7 +24,7 @@ builder.Services.Configure<RouteOptions>(opt => opt.LowercaseUrls = true);
 builder.Services.Configure<GzipCompressionProviderOptions>(opt => opt.Level = CompressionLevel.Fastest);
 builder.Services.Configure<MvcNewtonsoftJsonOptions>(opt => opt.SerializerSettings.Configure());
 
-//builder.Services.ConfigureAppSettings();
+builder.Services.ConfigureAppSettings();
 builder.Services.AddInfrastructure();
 builder.Services.AddAppServices();
 builder.Services.AddPeopleAdministrativeDbContext();
@@ -55,11 +55,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
 app.UseSwaggerAndUI();
-app.UseHealthChecks("/health", new HealthCheckOptions
-{
-    AllowCachingResponses = false,
-    ResponseWriter = HealthCheckExtensions.WriteResponse
-});
+app.UseHealthChecks();
 app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 app.UseRouting();
 app.UseResponseCompression();

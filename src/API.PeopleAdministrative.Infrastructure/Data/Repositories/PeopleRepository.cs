@@ -19,7 +19,7 @@ public sealed class PeopleRepository : RepositoryBase<Person>, IPeopleRepository
         await SaveChangesAsync(cancellationToken);
     }
 
-    public async Task DeleteAsync(int cpf, CancellationToken cancellationToken = default)
+    public async Task DeleteAsync(long cpf, CancellationToken cancellationToken = default)
     {
         var people = await SearchAsync(cpf);
         if (people != null)
@@ -29,7 +29,7 @@ public sealed class PeopleRepository : RepositoryBase<Person>, IPeopleRepository
         }
     }
 
-    public async Task<Person> SearchAsync(int cpf, CancellationToken cancellationToken = default)
+    public async Task<Person> SearchAsync(long cpf, CancellationToken cancellationToken = default)
         => await DbSet
         .AsNoTracking()
         .FirstOrDefaultAsync(p => p.Cpf.Equals(cpf), cancellationToken);

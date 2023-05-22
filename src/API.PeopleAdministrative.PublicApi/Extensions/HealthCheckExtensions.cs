@@ -1,5 +1,7 @@
 ﻿using API.PeopleAdministrative.Shared.Extensions;
 using Ardalis.GuardClauses;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -16,7 +18,16 @@ public static class HealthCheckExtensions
     public static IHealthChecksBuilder AddHealthChecks(this IServiceCollection services, string connectionString)
     {
         Guard.Against.NullOrWhiteSpace(connectionString);
-        return services.AddHealthChecks(connectionString).AddCheck<GCInfoHealthCheck>("GCInfoCheck", HealthStatus.Degraded, new string[1] { "memory" }).AddSqlServer(connectionString, "SELECT @@VERSION;", "sql", HealthStatus.Degraded, new string[3] { "db", "sql", "sqlserver" });
+        return services.AddHealthChecks().AddCheck<GCInfoHealthCheck>("GCInfoCheck", HealthStatus.Degraded, new string[1] { "memory" }).AddMySql(connectionString, "SELECT @@VERSION;", HealthStatus.Degraded, new string[3] { "db", "sql", "mysql" });
+    }
+
+    public static void UseHealthChecks(this WebApplication app)
+    {
+        app.UseHealthChecks("/health", new HealthCheckOptions
+        {
+            AllowCachingResponses = false,
+            ResponseWriter = WriteResponse
+        });
     }
 
     public static Task WriteResponse(HttpContext context, HealthReport report)

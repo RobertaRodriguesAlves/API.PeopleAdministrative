@@ -9,8 +9,8 @@ namespace API.PeopleAdministrative.Application.Interfaces;
 
 public interface IAdminService : IAppService
 {
-    Task<Result<Person>> GetAsync(int cpf, CancellationToken cancellationToken = default);
+    Task<Result<Person>> GetAsync(long cpf, CancellationToken cancellationToken = default);
     Task<Result> UpdateAsync(UpdatePersonRequest request, CancellationToken cancellationToken = default);
-    Task<Result> DeleteAsync(int cpf, CancellationToken cancellationToken = default);
+    Task<Result> DeleteAsync(long cpf, CancellationToken cancellationToken = default);
     Task<Result> CreateAsync(CreatePersonRequest request, CancellationToken cancellationToken = default);
 }

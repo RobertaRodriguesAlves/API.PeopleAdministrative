@@ -41,7 +41,7 @@ public class AdminController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<Person>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> GetByCpf([FromQuery] int cpf)
+    public async Task<IActionResult> GetByCpf([FromQuery] long cpf)
         => (await _service.GetAsync(cpf)).ToActionResult();
 
     /// <summary>
@@ -67,6 +67,6 @@ public class AdminController : ControllerBase
     [ProducesResponseType(typeof(ApiResponse<string>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Delete([FromRoute] int cpf)
+    public async Task<IActionResult> Delete([FromRoute] long cpf)
         => (await _service.DeleteAsync(cpf)).ToActionResult();
 }

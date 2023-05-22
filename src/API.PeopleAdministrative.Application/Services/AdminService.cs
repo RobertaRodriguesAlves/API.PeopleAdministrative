@@ -32,7 +32,7 @@ public sealed class AdminService : IAdminService
         return Result.Ok();
     }
 
-    public async Task<Result> DeleteAsync(int cpf, CancellationToken cancellationToken = default)
+    public async Task<Result> DeleteAsync(long cpf, CancellationToken cancellationToken = default)
     {
         var person = await _repository.SearchAsync(cpf, cancellationToken);
         if (person is null)
@@ -44,7 +44,7 @@ public sealed class AdminService : IAdminService
         return Result.Ok();
     }
 
-    public async Task<Result<Person>> GetAsync(int cpf, CancellationToken cancellationToken = default)
+    public async Task<Result<Person>> GetAsync(long cpf, CancellationToken cancellationToken = default)
     {
         if (cpf < 0)
             return Result.Fail<Person>("Falha na consulta.");
@@ -55,7 +55,7 @@ public sealed class AdminService : IAdminService
     public async Task<Result> UpdateAsync(UpdatePersonRequest request, CancellationToken cancellationToken = default)
     {
         await request.ValidateAsync();
-        if (request.IsValid)
+        if (!request.IsValid)
             return request.ToFail();
 
         var person = await _repository.SearchAsync(request.Cpf, cancellationToken);

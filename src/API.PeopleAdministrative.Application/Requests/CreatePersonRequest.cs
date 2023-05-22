@@ -6,14 +6,14 @@ namespace API.PeopleAdministrative.Application.Requests;
 
 public class CreatePersonRequest : BaseRequestWithValidation
 {
-    public CreatePersonRequest(int cpf, string nome, string endereco)
+    public CreatePersonRequest(long cpf, string nome, string endereco)
     {
         Cpf = cpf;
         Nome = nome;
         Endereco = endereco;
     }
 
-    public int Cpf { get; private set; }
+    public long Cpf { get; private set; }
     public string Nome { get; private set; }
     public string Endereco { get; private set; }
 
