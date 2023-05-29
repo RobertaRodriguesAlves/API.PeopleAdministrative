@@ -1,0 +1,25 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["src/API.PeopleAdministrative.PublicApi/API.PeopleAdministrative.PublicApi.csproj", "src/API.PeopleAdministrative.PublicApi/"]
+COPY ["src/API.PeopleAdministrative.Application/API.PeopleAdministrative.Application.csproj", "src/API.PeopleAdministrative.Application/"]
+COPY ["src/API.PeopleAdministrative.Domain/API.PeopleAdministrative.Domain.csproj", "src/API.PeopleAdministrative.Domain/"]
+COPY ["src/API.PeopleAdministrative.Shared/API.PeopleAdministrative.Shared.csproj", "src/API.PeopleAdministrative.Shared/"]
+COPY ["src/API.PeopleAdministrative.Infrastructure/API.PeopleAdministrative.Infrastructure.csproj", "src/API.PeopleAdministrative.Infrastructure/"]
+RUN dotnet restore "src/API.PeopleAdministrative.PublicApi/API.PeopleAdministrative.PublicApi.csproj"
+COPY . .
+WORKDIR "/src/src/API.PeopleAdministrative.PublicApi"
+RUN dotnet build "API.PeopleAdministrative.PublicApi.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "API.PeopleAdministrative.PublicApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "API.PeopleAdministrative.PublicApi.dll"]
