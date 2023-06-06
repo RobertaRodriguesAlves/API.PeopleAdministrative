@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API.PeopleAdministrative.Domain\API.PeopleAdministrative.Domain.csproj" />
+    <ProjectReference Include="../API.PeopleAdministrative.Domain/API.PeopleAdministrative.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -26,9 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\API.PeopleAdministrative.Application\API.PeopleAdministrative.Application.csproj" />
-    <ProjectReference Include="..\API.PeopleAdministrative.Domain\API.PeopleAdministrative.Domain.csproj" />
-    <ProjectReference Include="..\API.PeopleAdministrative.Infrastructure\API.PeopleAdministrative.Infrastructure.csproj" />
+    <ProjectReference Include="../API.PeopleAdministrative.Application/API.PeopleAdministrative.Application.csproj" />
+    <ProjectReference Include="../API.PeopleAdministrative.Domain/API.PeopleAdministrative.Domain.csproj" />
+    <ProjectReference Include="../API.PeopleAdministrative.Infrastructure/API.PeopleAdministrative.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

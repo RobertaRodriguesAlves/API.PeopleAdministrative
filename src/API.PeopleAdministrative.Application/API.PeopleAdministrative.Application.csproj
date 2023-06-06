@@ -13,8 +13,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\API.PeopleAdministrative.Domain\API.PeopleAdministrative.Domain.csproj" />
-	  <ProjectReference Include="..\API.PeopleAdministrative.Shared\API.PeopleAdministrative.Shared.csproj" />
+	  <ProjectReference Include="../API.PeopleAdministrative.Domain/API.PeopleAdministrative.Domain.csproj" />
+	  <ProjectReference Include="../API.PeopleAdministrative.Shared/API.PeopleAdministrative.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

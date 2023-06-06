@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\API.PeopleAdministrative.Shared\API.PeopleAdministrative.Shared.csproj" />
+	  <ProjectReference Include="../API.PeopleAdministrative.Shared/API.PeopleAdministrative.Shared.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -3,7 +3,8 @@ version: '3.8'
 services:
 
   workerapp:
-    image: mcr.microsoft.com/dotnet/aspnet:6.0
+    build: 
+      context: ./src/API.PeopleAdministrative.PublicApi
     ports:
       - '5000:80'
     depends_on:
