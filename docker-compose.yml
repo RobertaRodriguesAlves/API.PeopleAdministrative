@@ -4,7 +4,7 @@ services:
 
   workerapp:
     build: 
-      context: ./src/API.PeopleAdministrative.PublicApi
+      context: .
     ports:
       - '5000:80'
     depends_on:
